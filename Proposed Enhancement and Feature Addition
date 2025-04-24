@@ -1,0 +1,58 @@
+Proposed Enhancement: Dual LLM Integration for Rephrasing and Response Validation
+To further improve the reliability and user experience of the RAG-based chatbot, we propose the integration of two supplementary Language Models (LLMs):
+1. LLM for Query Rephrasing
+An LLM can be employed prior to the retrieval phase to:
+•	Rephrase ambiguous or incomplete user queries into clearer, structured forms.
+•	Improve retrieval precision by aligning queries with the indexed knowledge base format.
+Example:
+User Query: “Does XYZ have spicy options?”
+Rephrased: “List spicy menu items available at XYZ restaurant.”
+This step increases the likelihood of retrieving relevant and comprehensive context from the knowledge base.
+2. LLM for Response Validation
+A secondary LLM module can be used after the response is generated to verify whether:
+•	The answer is grounded in retrieved data.
+•	The response is relevant, coherent, and accurate.
+If the validation fails, the system will withhold the generated output and instead display a fallback message such as:
+“Sorry, I can’t answer that based on the available data.”
+This prevents hallucinated or irrelevant responses, improving the overall trustworthiness of the chatbot.
+Enhanced RAG Pipeline (Proposed)
+User Query 
+   ↓
+Rephrasing LLM 
+   ↓
+Retriever → Generator 
+   ↓
+Validator LLM  →    (If invalid) → "Sorry, I can’t answer that based on the available data."
+This two-stage LLM enhancement strengthens the chatbot’s ability to handle vague inputs and ensures output quality — a critical step toward production-readiness.
+
+Feature Addition:
+Feature: Spice Level Feedback System for Restaurant Chatbot
+Objective: To collect structured feedback on the perceived spice levels of dishes from customers through the chatbot. This feedback helps restaurants better align their recipes to customer preferences and aids future customers in selecting dishes that match their spice tolerance.
+ 
+User Flow Design:
+1.	Feedback Prompt
+o	Triggered after a customer finishes a meal or submits a review.
+o	Chatbot message: "We hope you enjoyed your meal! Could you tell us how spicy you found it?"
+2.	Spice Rating Scale
+o	Display a simple, user-friendly scale:
+	🥶 1 - Not spicy at all
+	🙂 2 - Mild
+	😅 3 - Medium
+	🔥 4 - Spicy
+	💀 5 - Very Spicy
+o	Alternatively, use numeric values (1 to 5) with corresponding labels.
+3.	Response Collection
+o	Accept either emoji or numeric input.
+o	Optionally follow up with: "Would you prefer it spicier or less spicy next time?"
+4.	Data Storage and Usage
+o	Log spice rating with associated dish and restaurant.
+o	Optionally associate with user profile for personalized recommendations.
+o	Aggregate data for restaurant dashboards and item-based spice indicators.
+
+5.	Feedback Loop (Optional Enhancement)
+o	Display spice trend badges on menus:
+o	Example: "Caution: Rated Very Spicy by 85% of customers."
+o	Use feedback to adjust chatbot recommendations or menu highlights.
+
+Conclusion: Implementing a spice level feedback system via chatbot adds significant value to both customers and restaurants. It promotes personalization, improves food quality, and helps manage expectations, making dining experiences more enjoyable and data-informed.
+
